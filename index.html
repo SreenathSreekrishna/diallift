@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>DialLift</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="hero card">
+      <div class="hero-copy">
+        <p class="eyebrow">daily abstract puzzle</p>
+        <div class="title-row">
+          <h1>DialLift</h1>
+          <div class="meta-pill" id="dailyLabel">Daily</div>
+        </div>
+        <p class="subtitle">Match the target by rotating rings and shifting the selected spoke.</p>
+      </div>
+      <div class="hero-meta">
+        <div class="difficulty-switch" role="tablist" aria-label="Difficulty">
+          <button class="diff-btn" data-difficulty="easy">Easy</button>
+          <button class="diff-btn active-mid" data-difficulty="medium">Medium</button>
+          <button class="diff-btn" data-difficulty="hard">Hard</button>
+        </div>
+        <div class="meta-pill muted" id="seedLabel">Seed</div>
+        <div class="meta-pill muted" id="statusPill">Not solved</div>
+      </div>
+    </header>
+
+    <section class="main-grid">
+      <section class="board-panel card">
+        <div class="board-header">
+          <div>
+            <h2>Board</h2>
+            <p>Click a spoke wedge to select it.</p>
+          </div>
+          <div class="stats-inline">
+            <span id="moveCount">0 moves</span>
+            <span id="elapsed">00:00</span>
+          </div>
+        </div>
+
+        <div class="board-wrap">
+          <svg id="boardSvg" viewBox="0 0 520 520" aria-label="DialLift board"></svg>
+          <div class="center-label">
+            <div class="center-title">Selected</div>
+            <div class="center-value" id="spokeLabel">0</div>
+          </div>
+        </div>
+
+        <div class="control-grid" id="controlGrid">
+          <button class="btn tone-outer" data-action="rotOuterCw" aria-label="Rotate outer ring clockwise"><span class="glyph">↻</span><span class="keycap">Q</span></button>
+          <button class="btn tone-outer" data-action="rotOuterCcw" aria-label="Rotate outer ring counterclockwise"><span class="glyph">↺</span><span class="keycap">A</span></button>
+          <button class="btn tone-middle" data-action="rotMidCw" aria-label="Rotate middle ring clockwise"><span class="glyph">↻</span><span class="keycap">W</span></button>
+          <button class="btn tone-middle" data-action="rotMidCcw" aria-label="Rotate middle ring counterclockwise"><span class="glyph">↺</span><span class="keycap">S</span></button>
+          <button class="btn tone-inner" data-action="rotInnerCw" aria-label="Rotate inner ring clockwise"><span class="glyph">↻</span><span class="keycap">E</span></button>
+          <button class="btn tone-inner" data-action="rotInnerCcw" aria-label="Rotate inner ring counterclockwise"><span class="glyph">↺</span><span class="keycap">D</span></button>
+          <button class="btn tone-shift-1 primary" data-action="shiftCw" aria-label="Shift selected spoke upward"><span class="glyph">⇡</span><span class="keycap">R</span></button>
+          <button class="btn tone-shift-2 primary" data-action="shiftCcw" aria-label="Shift selected spoke downward"><span class="glyph">⇣</span><span class="keycap">F</span></button>
+          <button class="btn ghost" data-action="undo" aria-label="Undo"><span class="glyph">Undo</span><span class="keycap">Z</span></button>
+          <button class="btn ghost" data-action="reset" aria-label="Reset"><span class="glyph">Reset</span><span class="keycap">X</span></button>
+        </div>
+      </section>
+
+      <aside class="side-panel">
+        <section class="card mini-card">
+          <div class="board-header compact">
+            <div>
+              <h2>Target</h2>
+              <p>Restore the pattern shown here.</p>
+            </div>
+          </div>
+          <div class="mini-wrap">
+            <svg id="targetSvg" viewBox="0 0 520 520" aria-label="DialLift target"></svg>
+          </div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="winModal" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+    <div class="modal-card card">
+      <div class="win-burst" aria-hidden="true"></div>
+      <h2 id="winTitle">Solved</h2>
+      <p id="winText"></p>
+      <pre id="winShare"></pre>
+      <div class="share-actions">
+        <button class="btn primary" id="copyFromModal">Copy share text</button>
+        <button class="btn ghost" id="closeModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
